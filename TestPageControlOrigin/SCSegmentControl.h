@@ -15,17 +15,17 @@ typedef NS_ENUM(int,PageControlType){
 #define kScreen_Height [UIScreen mainScreen].bounds.size.height
 #define kScreen_Width [UIScreen mainScreen].bounds.size.width
 
-@class SegControl;
+@class SCSegmentControl;
 
 @protocol SegControlDelegate <NSObject>
 
-- (void)segmentControl:(SegControl *)control selectedIndex:(NSInteger)index;
+- (void)segmentControl:(SCSegmentControl *)control selectedIndex:(NSInteger)index;
 
 @end
 
 typedef void(^SegControlBlock)(NSInteger index);
 
-@interface SegControl : UIView
+@interface SCSegmentControl : UIView
 
 @property (nonatomic) NSInteger currentIndex, selectedIndex;
 

@@ -9,13 +9,27 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "TestPageControlOrigin/SCNavigationController.m"
-            timestampString = "513574264.33817"
+            filePath = "TestPageControlOrigin/PopAlertViewController.m"
+            timestampString = "513761769.757273"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "125"
-            endingLineNumber = "125"
-            landmarkName = "-indexOfController:"
+            startingLineNumber = "277"
+            endingLineNumber = "277">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TestPageControlOrigin/PopAlertViewController.m"
+            timestampString = "513761464.954718"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "58"
+            endingLineNumber = "58"
+            landmarkName = "-init"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -25,13 +39,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "TestPageControlOrigin/SCNavigationController.m"
-            timestampString = "513574264.33817"
+            filePath = "TestPageControlOrigin/PopAlertViewController.m"
+            timestampString = "513761464.954718"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "116"
-            endingLineNumber = "116"
-            landmarkName = "-pageViewController:didFinishAnimating:previousViewControllers:transitionCompleted:"
+            startingLineNumber = "49"
+            endingLineNumber = "49"
+            landmarkName = "+sharedManager"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -41,60 +55,44 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "TestPageControlOrigin/SegControl.m"
-            timestampString = "513510433.138408"
+            filePath = "TestPageControlOrigin/SPCAlertViewController.m"
+            timestampString = "513754085.728315"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "180"
-            endingLineNumber = "180"
-            landmarkName = "-setTitle:withIndex:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TestPageControlOrigin/SCNavigationController.m"
-            timestampString = "513574264.33817"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "138"
-            endingLineNumber = "138"
-            landmarkName = "-showViewControllerOfIndex:"
+            startingLineNumber = "44"
+            endingLineNumber = "44"
+            landmarkName = "-commonAlertController:Title:message:completion:"
             landmarkType = "7">
             <Locations>
                <Location
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "-[SCNavigationController showViewControllerOfIndex:]"
+                  symbolName = "-[SPCAlertViewController commonAlertController:Title:message:completion:]"
                   moduleName = "TestPageControlOrigin"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/noah/Documents/Xuzy/Exercise/TestPageControlOrigin/TestPageControlOrigin/SCNavigationController.m"
-                  timestampString = "513682103.893248"
+                  urlString = "file:///Users/noah/Documents/Xuzy/Exercise/TestPageControlOrigin/TestPageControlOrigin/SPCAlertViewController.m"
+                  timestampString = "513761465.992605"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "138"
-                  endingLineNumber = "138"
-                  offsetFromSymbolStart = "151">
+                  startingLineNumber = "44"
+                  endingLineNumber = "44"
+                  offsetFromSymbolStart = "176">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "__52-[SCNavigationController showViewControllerOfIndex:]_block_invoke"
+                  symbolName = "__73-[SPCAlertViewController commonAlertController:Title:message:completion:]_block_invoke"
                   moduleName = "TestPageControlOrigin"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/noah/Documents/Xuzy/Exercise/TestPageControlOrigin/TestPageControlOrigin/SCNavigationController.m"
-                  timestampString = "513682103.897113"
+                  urlString = "file:///Users/noah/Documents/Xuzy/Exercise/TestPageControlOrigin/TestPageControlOrigin/SPCAlertViewController.m"
+                  timestampString = "513761465.994324"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "139"
-                  endingLineNumber = "139"
-                  offsetFromSymbolStart = "24">
+                  startingLineNumber = "46"
+                  endingLineNumber = "46"
+                  offsetFromSymbolStart = "52">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -105,13 +103,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "TestPageControlOrigin/SCNavigationController.m"
-            timestampString = "513574264.33817"
+            filePath = "TestPageControlOrigin/PopAlertViewController.m"
+            timestampString = "513761769.757273"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "140"
-            endingLineNumber = "140"
-            landmarkName = "-showViewControllerOfIndex:"
+            startingLineNumber = "175"
+            endingLineNumber = "175"
+            landmarkName = "-showVtrl:title:alertMessage:alertType:handler:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -121,29 +119,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "TestPageControlOrigin/SCNavigationController.m"
-            timestampString = "513574264.33817"
+            filePath = "TestPageControlOrigin/PopAlertViewController.m"
+            timestampString = "513761769.757273"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "90"
-            endingLineNumber = "90"
-            landmarkName = "-pageViewController:viewControllerBeforeViewController:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TestPageControlOrigin/SCNavigationController.m"
-            timestampString = "513574264.33817"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "103"
-            endingLineNumber = "103"
-            landmarkName = "-pageViewController:viewControllerAfterViewController:"
+            startingLineNumber = "169"
+            endingLineNumber = "169"
+            landmarkName = "-showVtrl:title:alertMessage:alertType:handler:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

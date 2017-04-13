@@ -13,7 +13,6 @@
 
 - (NSString *)replace:(NSString *)str0 withString:(NSString *)str1
 {
-
     NSMutableString *string= self.mutableCopy;
     [string replaceOccurrencesOfString:str0 withString:str1 options:NSBackwardsSearch range:NSMakeRange(self.length-3,3)];
     return string.copy;
@@ -33,8 +32,7 @@
                                  attributes:@{NSFontAttributeName: font,
                                               NSParagraphStyleAttributeName: style}
                                     context:nil].size;
-    resultSize = CGSizeMake(floor(resultSize.width + 1), floor(resultSize.height + 1));//上面用的小 width（height） 来计算了，这里要 +1
-    return resultSize;
+    resultSize = CGSizeMake(floor(resultSize.width + 1), floor(resultSize.height + 1));    return resultSize;
 }
 
 - (CGFloat)getHeightWithFont:(UIFont *)font constrainedToSize:(CGSize)size{

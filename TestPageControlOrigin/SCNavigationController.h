@@ -12,7 +12,6 @@
 
 @property (nonatomic, strong) NSMutableArray *viewControllerArray;
 @property (nonatomic, strong, readonly)UIPageViewController *pageController;
-
 @property (nonatomic) NSInteger selectedIndex;
 
 @end

@@ -1,0 +1,35 @@
+//
+//  PrefixHeader.pch
+//  TestPageControlOrigin
+//
+//  Created by Panasonic on 2017/04/12.
+//  Copyright © 2017年 Panasonic. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#endif /* PrefixHeader_pch */
+#import <UIKit/UIKit.h>
+
+
+typedef NS_ENUM(int, AlertStyle){
+    AlertSuccess = 0,
+    AlertWarning
+};
+
+#define kScreen_Bounds [UIScreen mainScreen].bounds
+#define kScreen_Height [UIScreen mainScreen].bounds.size.height
+#define kScreen_Width [UIScreen mainScreen].bounds.size.width
+
+#define kScaleFrom_iPhone5_Desgin(_X_) (_X_ * (kScreen_Width/320))
+#define kWidth_iPhone5_Desgin(_X_) (_X_ * (kScreen_Width/375/2))
+#define kHeightFrom_iPhone5_Desgin(_X_) (_X_ * (kScreen_Height/568/2))
+
+
+#define RGBA(R, G, B, A) [UIColor colorWithRed:R/255.0 green:G/255.0 blue:B/255.0 alpha:A]
+
+#define SYSTEM_VERSION_LESS_THAN(v)                 ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)

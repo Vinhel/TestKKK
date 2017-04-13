@@ -6,7 +6,7 @@
 //  Copyright © 2017年 noah. All rights reserved.
 //
 
-#import "SegControl.h"
+#import "SCSegmentControl.h"
 #import "NSString+customString.h"
 
 #define SegControlSpace (5)
@@ -53,7 +53,7 @@
 
 @end
 
-@interface SegControl ()<UIScrollViewDelegate>
+@interface SCSegmentControl ()<UIScrollViewDelegate>
 
 @property (nonatomic , strong) UIScrollView *contentView;
 
@@ -69,7 +69,7 @@
 
 @end
 
-@implementation SegControl
+@implementation SCSegmentControl
 
 - (id)initWithFrame:(CGRect)frame Items:(NSArray *)titleItem
 {
@@ -230,10 +230,7 @@
         
         else   if (index != _currentIndex ) {
             SegControlItem *curItem = [_items objectAtIndex:index];
-            CGRect rect = [_itemFrames[index] CGRectValue];
-         
             if (_currentIndex < 0) {
-               
                 [curItem setSelected:YES];
                 _currentIndex = index;
             } else {

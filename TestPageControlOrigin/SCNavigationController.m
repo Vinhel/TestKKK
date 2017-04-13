@@ -72,11 +72,12 @@
 {
     if ([self.topViewController isKindOfClass:[UIPageViewController class]]) {
         pageController = (UIPageViewController *)self.topViewController;
-        pageController.delegate = self;
-        pageController.dataSource = self;
         [pageController setViewControllers:@[[viewControllerArray objectAtIndex:0]] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:^(BOOL finished) {
             
         }];
+        
+        pageController.delegate = self;
+        pageController.dataSource = self;
         
     }
 }

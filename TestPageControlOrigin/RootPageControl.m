@@ -7,9 +7,10 @@
 //
 
 #import "RootPageControl.h"
-#import "SegControl.h"
+#import "SCSegmentControl.h"
 //#import "SCPageController.h"
 #import "SCNavigationController.h"
+#import "UIBarButtonItem+Badge.h"
 
 @interface RootPageControl ()
 @property (weak, nonatomic) IBOutlet UIView *containerView;
@@ -23,10 +24,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-        [self setupSegment];
+    [self setupSegment];
     [self setupViewControllers];
-
-
 }
 
 - (void)setupSegment
@@ -35,7 +34,7 @@
     
     __weak typeof(self) weakSelf = self;
     
-    SegControl *_mySegmentControl = [[SegControl alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width, 50) Items:imgArr selectedBlock:^(NSInteger index) {
+    SCSegmentControl *_mySegmentControl = [[SCSegmentControl alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width, 50) Items:imgArr selectedBlock:^(NSInteger index) {
         weakSelf.navigationController.selectedIndex = index;
         
     }];
@@ -43,8 +42,6 @@
     _mySegmentControl.selectedIndex = 0;
     _mySegmentControl.backgroundColor = [UIColor redColor];
     [self.segView addSubview:_mySegmentControl];
-    
-    
 }
 
 - (void)setupViewControllers
@@ -65,16 +62,14 @@
     
     
     UIPageViewController *pageController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:nil];
-    
+
     _navigationController = [[SCNavigationController alloc]initWithRootViewController:pageController];
     _navigationController.navigationBar.hidden = YES;
     [_navigationController.viewControllerArray addObjectsFromArray:@[a, b, c, d]];
    
     [self addChildViewController:_navigationController];
-    
+    _navigationController.view.frame = self.containerView.frame;
     [self.containerView addSubview:_navigationController.view];
-    
-    
 }
 
 
