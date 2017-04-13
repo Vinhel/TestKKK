@@ -8,7 +8,7 @@
 
 #import "MainViewController.h"
 #import "UIViewController+UIActivityIndicatorView.h"
-#import "PopAlertView.h"
+//#import "PopAlertView.h"
 
 @interface MainViewController ()
 

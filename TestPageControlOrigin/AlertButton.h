@@ -14,6 +14,11 @@ typedef NS_ENUM(NSInteger, AlertButtonType)
     AlertButtonSelector
 };
 
+typedef NSDictionary* (^CompleteButtonFormatBlock)(void);
+typedef NSDictionary* (^ButtonFormatBlock)(void);
+
 @interface AlertButton : UIButton
+
+@property (copy, nonatomic) CompleteButtonFormatBlock completeButtonFormatBlock;
 
 @end

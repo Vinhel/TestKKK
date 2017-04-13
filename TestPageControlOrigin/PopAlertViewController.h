@@ -11,7 +11,7 @@
 @interface PopAlertViewController : UIViewController
 
 + (PopAlertViewController *)sharedManager;
-
+- (instancetype)initWithNewWindow;
 
 - (void)showVtrl:(UIViewController *)vtrl title:(NSString *)titleString alertMessage:(NSString *)alertMessage alertType:(AlertStyle)type handler:(void (^ __nullable)(UIButton *button))handler;
 

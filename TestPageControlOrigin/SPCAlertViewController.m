@@ -8,7 +8,7 @@
 
 #import "SPCAlertViewController.h"
 #import "SPCIndicatorWindow.h"
-#import "PopAlertView.h"
+//#import "PopAlertView.h"
 #import "PopAlertViewController.h"
 
 @interface SPCAlertViewController()
@@ -40,7 +40,8 @@ static SPCAlertViewController *sharedData_ = nil;
 //    }];
     
     
-    PopAlertViewController *popVtrl = [PopAlertViewController sharedManager];
+//    PopAlertViewController *popVtrl = [PopAlertViewController sharedManager];
+    PopAlertViewController *popVtrl = [[PopAlertViewController alloc]initWithNewWindow];
     [popVtrl showVtrl:vtrl title:title alertMessage:message alertType:AlertSuccess handler:^(UIButton *button) {
         
     }];

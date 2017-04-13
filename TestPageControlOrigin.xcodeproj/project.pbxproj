@@ -8,8 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		07F1E32D1E9F2A2500AB9186 /* PopAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07F1E32B1E9F2A2500AB9186 /* PopAlertViewController.m */; };
-		07F1E32E1E9F2A2500AB9186 /* PopAlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 07F1E32C1E9F2A2500AB9186 /* PopAlertViewController.xib */; };
 		07F1E3321E9F506300AB9186 /* AlertButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 07F1E3311E9F506300AB9186 /* AlertButton.m */; };
+		07F1E3351E9F8B1900AB9186 /* AlertTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 07F1E3341E9F8B1900AB9186 /* AlertTextView.m */; };
 		4F1E845E1E9B49D200DA6898 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F1E845D1E9B49D200DA6898 /* main.m */; };
 		4F1E84611E9B49D200DA6898 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F1E84601E9B49D200DA6898 /* AppDelegate.m */; };
 		4F1E84671E9B49D200DA6898 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F1E84651E9B49D200DA6898 /* Main.storyboard */; };
@@ -22,8 +22,6 @@
 		4F1E84971E9B4F4E00DA6898 /* NSString+customString.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F1E84961E9B4F4E00DA6898 /* NSString+customString.m */; };
 		4F1E849F1E9B6CF100DA6898 /* SCNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F1E849E1E9B6CF100DA6898 /* SCNavigationController.m */; };
 		4FB36FBE1E9DBFFD00CCDF52 /* AlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FB36FBD1E9DBFFD00CCDF52 /* AlertViewController.m */; };
-		4FB36FC71E9DD35000CCDF52 /* PopAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FB36FC61E9DD35000CCDF52 /* PopAlertView.m */; };
-		4FB36FC91E9DD36000CCDF52 /* PopAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4FB36FC81E9DD36000CCDF52 /* PopAlertView.xib */; };
 		4FB36FD21E9E031300CCDF52 /* UIViewController+UIActivityIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FB36FD11E9E031300CCDF52 /* UIViewController+UIActivityIndicatorView.m */; };
 		4FB36FD51E9E040E00CCDF52 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FB36FD41E9E040E00CCDF52 /* MainViewController.m */; };
 		4FB36FD81E9E06DE00CCDF52 /* NewAlertController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FB36FD71E9E06DE00CCDF52 /* NewAlertController.m */; };
@@ -57,9 +55,10 @@
 /* Begin PBXFileReference section */
 		07F1E32A1E9F2A2500AB9186 /* PopAlertViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopAlertViewController.h; sourceTree = "<group>"; };
 		07F1E32B1E9F2A2500AB9186 /* PopAlertViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopAlertViewController.m; sourceTree = "<group>"; };
-		07F1E32C1E9F2A2500AB9186 /* PopAlertViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PopAlertViewController.xib; sourceTree = "<group>"; };
 		07F1E3301E9F506300AB9186 /* AlertButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertButton.h; sourceTree = "<group>"; };
 		07F1E3311E9F506300AB9186 /* AlertButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertButton.m; sourceTree = "<group>"; };
+		07F1E3331E9F8B1900AB9186 /* AlertTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertTextView.h; sourceTree = "<group>"; };
+		07F1E3341E9F8B1900AB9186 /* AlertTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertTextView.m; sourceTree = "<group>"; };
 		4F1E84591E9B49D200DA6898 /* TestPageControlOrigin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestPageControlOrigin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F1E845D1E9B49D200DA6898 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		4F1E845F1E9B49D200DA6898 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -84,9 +83,6 @@
 		4F1E849E1E9B6CF100DA6898 /* SCNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCNavigationController.m; sourceTree = "<group>"; };
 		4FB36FBC1E9DBFFD00CCDF52 /* AlertViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertViewController.h; sourceTree = "<group>"; };
 		4FB36FBD1E9DBFFD00CCDF52 /* AlertViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertViewController.m; sourceTree = "<group>"; };
-		4FB36FC51E9DD35000CCDF52 /* PopAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopAlertView.h; sourceTree = "<group>"; };
-		4FB36FC61E9DD35000CCDF52 /* PopAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopAlertView.m; sourceTree = "<group>"; };
-		4FB36FC81E9DD36000CCDF52 /* PopAlertView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PopAlertView.xib; sourceTree = "<group>"; };
 		4FB36FD01E9E031300CCDF52 /* UIViewController+UIActivityIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+UIActivityIndicatorView.h"; sourceTree = "<group>"; };
 		4FB36FD11E9E031300CCDF52 /* UIViewController+UIActivityIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+UIActivityIndicatorView.m"; sourceTree = "<group>"; };
 		4FB36FD31E9E040E00CCDF52 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
@@ -151,9 +147,10 @@
 			children = (
 				07F1E32A1E9F2A2500AB9186 /* PopAlertViewController.h */,
 				07F1E32B1E9F2A2500AB9186 /* PopAlertViewController.m */,
-				07F1E32C1E9F2A2500AB9186 /* PopAlertViewController.xib */,
 				07F1E3301E9F506300AB9186 /* AlertButton.h */,
 				07F1E3311E9F506300AB9186 /* AlertButton.m */,
+				07F1E3331E9F8B1900AB9186 /* AlertTextView.h */,
+				07F1E3341E9F8B1900AB9186 /* AlertTextView.m */,
 			);
 			name = AlertKit;
 			sourceTree = "<group>";
@@ -190,9 +187,6 @@
 				4FB36FEA1E9E2BAE00CCDF52 /* PopUpView.h */,
 				4FB36FEB1E9E2BAE00CCDF52 /* PopUpView.m */,
 				4FB36FEC1E9E2BAE00CCDF52 /* PopUpView.xib */,
-				4FB36FC51E9DD35000CCDF52 /* PopAlertView.h */,
-				4FB36FC61E9DD35000CCDF52 /* PopAlertView.m */,
-				4FB36FC81E9DD36000CCDF52 /* PopAlertView.xib */,
 				4FB36FD61E9E06DD00CCDF52 /* NewAlertController.h */,
 				4FB36FD71E9E06DE00CCDF52 /* NewAlertController.m */,
 				4FB36FD91E9E071900CCDF52 /* NewAlertController.xib */,
@@ -376,11 +370,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				4F1E846C1E9B49D200DA6898 /* LaunchScreen.storyboard in Resources */,
-				07F1E32E1E9F2A2500AB9186 /* PopAlertViewController.xib in Resources */,
 				4F1E84691E9B49D200DA6898 /* Assets.xcassets in Resources */,
 				4FB36FDA1E9E071900CCDF52 /* NewAlertController.xib in Resources */,
 				4F1E84671E9B49D200DA6898 /* Main.storyboard in Resources */,
-				4FB36FC91E9DD36000CCDF52 /* PopAlertView.xib in Resources */,
 				4FB36FEE1E9E2BAE00CCDF52 /* PopUpView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -416,7 +408,6 @@
 				4FB36FED1E9E2BAE00CCDF52 /* PopUpView.m in Sources */,
 				4FD7125B1E9CE60B00C03822 /* SPCAlertViewController.m in Sources */,
 				4F1E849F1E9B6CF100DA6898 /* SCNavigationController.m in Sources */,
-				4FB36FC71E9DD35000CCDF52 /* PopAlertView.m in Sources */,
 				07F1E32D1E9F2A2500AB9186 /* PopAlertViewController.m in Sources */,
 				4FB36FD81E9E06DE00CCDF52 /* NewAlertController.m in Sources */,
 				4FD712401E9C815E00C03822 /* UIBarButtonItem+Badge.m in Sources */,
@@ -424,6 +415,7 @@
 				4F1E845E1E9B49D200DA6898 /* main.m in Sources */,
 				4FB36FD51E9E040E00CCDF52 /* MainViewController.m in Sources */,
 				4FB36FBE1E9DBFFD00CCDF52 /* AlertViewController.m in Sources */,
+				07F1E3351E9F8B1900AB9186 /* AlertTextView.m in Sources */,
 				4FB36FE91E9E164400CCDF52 /* UIAlertController+CustomAlert.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
