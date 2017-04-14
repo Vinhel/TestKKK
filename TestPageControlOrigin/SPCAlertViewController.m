@@ -42,9 +42,9 @@ static SPCAlertViewController *sharedData_ = nil;
     
 //    PopAlertViewController *popVtrl = [PopAlertViewController sharedManager];
     PopAlertViewController *popVtrl = [[PopAlertViewController alloc]initWithNewWindow];
-    [popVtrl showVtrl:vtrl title:title alertMessage:message alertType:AlertSuccess handler:^(UIButton *button) {
-        
-    }];
+    popVtrl.shouldDismissOnTapOutside = YES;
+//    popVtrl.alertType = AlertWarning;
+    [popVtrl showVtrl:vtrl title:title alertMessage:message alertType:AlertWarning completeText:@"OK"];
     
     
 }

@@ -8,7 +8,6 @@
 
 #import "PopUpView.h"
 
-
 @interface PopUpView ()
 @property (weak, nonatomic) IBOutlet UITextView *textView;
 @property (strong, nonatomic) IBOutlet UIView *innerView;

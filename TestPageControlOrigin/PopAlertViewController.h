@@ -7,12 +7,22 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AlertButton.h"
 
 @interface PopAlertViewController : UIViewController
+typedef void (^AlertActionBlock)(void);
+
 
 + (PopAlertViewController *)sharedManager;
 - (instancetype)initWithNewWindow;
 
-- (void)showVtrl:(UIViewController *)vtrl title:(NSString *)titleString alertMessage:(NSString *)alertMessage alertType:(AlertStyle)type handler:(void (^ __nullable)(UIButton *button))handler;
+- (void)showVtrl:(UIViewController *)vtrl title:(NSString *)titleString alertMessage:(NSString *)alertMessage alertType:(AlertStyle)type completeText:(NSString *)completeText;
+
+- (AlertButton *)addDoneButtonWithTitle:(NSString *)title;
+- (AlertButton *)addButton:(NSString *)titleStr actionBlock:(AlertActionBlock)action;
+
+@property (nonatomic, assign) BOOL shouldDismissOnTapOutside;//add gesture at backgroundView
+//@property (nonatomic, assign) AlertStyle alertType;
+@property (nonatomic, assign) BOOL isHeaderIcon;
 
 @end

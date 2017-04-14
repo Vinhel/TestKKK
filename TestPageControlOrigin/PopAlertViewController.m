@@ -7,13 +7,14 @@
 //
 
 #import "PopAlertViewController.h"
-#import "AlertButton.h"
 #import "AlertTextView.h"
+#define ADD_BUTTON_PADDING 10.0f
 
 @interface PopAlertViewController ()
 typedef void (^DismissBlock)(void);
 typedef void (^DismissAnimationCompletionBlock)(void);
 typedef void (^ShowAnimationCompletionBlock)(void);
+
 typedef NSDictionary* (^CompleteButtonFormatBlock)(void);
 
 @property (nonatomic, strong) NSMutableArray *pool;
@@ -25,13 +26,14 @@ typedef NSDictionary* (^CompleteButtonFormatBlock)(void);
 //@property (strong, nonatomic) IBOutlet UIView *backgroundView;
 @property (strong, nonatomic) UIView *containerView, *backgroundView, *headerView;
 @property (strong, nonatomic) UILabel *titleLabel;
-@property (strong, nonatomic) AlertTextView *messageTextView;
-
+@property (strong, nonatomic) UITextView *messageTextView;
+@property (strong, nonatomic) UIImageView *headerImgView;
 
 @property (assign, nonatomic) BOOL usingNewWindow, headImg;
 @property (nonatomic) CGFloat windowHeight;
 @property (nonatomic) CGFloat windowWidth;
-@property (nonatomic) CGFloat subTitleHeight;//message Height
+@property (nonatomic) CGFloat subTitleHeight, subTitleY;//message Height,Y
+
 
 //gesture
 @property (strong, nonatomic) UITapGestureRecognizer *gestureRecognizer;
@@ -39,7 +41,8 @@ typedef NSDictionary* (^CompleteButtonFormatBlock)(void);
 //inputs like textview textfield
 @property (strong, nonatomic) NSMutableArray *inputs;
 
-
+//buttons like ok, cancel -- Horizontal buttons
+@property (strong, nonatomic) NSMutableArray *buttons;
 
 //frame
 @property (assign, nonatomic) CGFloat kTitleTop;
@@ -80,7 +83,7 @@ static PopAlertViewController *sharedData_ = nil;
     if (self = [super init]) {
 //        [self setupNewWindow];
 //        self.usingNewWindow = YES;
-        [self setupViewWindowWidth:kScreen_Width*0.9];
+        [self setupViewWindowWidth:kScreen_Width*0.85];
     }
     return self;
 }
@@ -97,7 +100,7 @@ static PopAlertViewController *sharedData_ = nil;
 
 - (instancetype)initWithNewWindow
 {
-    self = [self initWithWindowWidth:kScreen_Width*0.9];
+    self = [self initWithWindowWidth:kScreen_Width*0.85];
     if(self)
     {
         [self setupNewWindow];
@@ -118,9 +121,6 @@ static PopAlertViewController *sharedData_ = nil;
 {
     [super viewWillLayoutSubviews];
     CGSize sz = kScreen_Bounds.size;
-    
-    // Check for larger top circle icon flag
-    
     // Check if the rootViewController is modal, if so we need to get the modal size not the main screen size
     if([self isModal] && !_usingNewWindow)
     {
@@ -141,6 +141,9 @@ static PopAlertViewController *sharedData_ = nil;
     CGRect newBackgroundFrame = self.backgroundView.frame;
     newBackgroundFrame.size = sz;
     self.backgroundView.frame = newBackgroundFrame;
+    
+    //Set Header Icon
+    self.headerImgView.frame = CGRectMake(12, 10, 30, 30);
     
     // Set new main frame
     CGRect r;
@@ -164,23 +167,42 @@ static PopAlertViewController *sharedData_ = nil;
     _containerView.backgroundColor = [UIColor whiteColor];
     
     _headerView.frame = CGRectMake(0, 0, _windowWidth, 50);
-    _titleLabel.frame = CGRectMake(12, 0, _windowWidth-12, 50);
+    _titleLabel.frame = _isHeaderIcon?CGRectMake(12+_headerImgView.frame.size.width+10, 0, _windowWidth-12-10-_headerImgView.frame.size.width, 50):CGRectMake(12, 0, _windowWidth-12, 50);
     
-    // Text fields
+    // subText messageTextView
     CGFloat y = (_titleLabel.text == nil) ? kTitleTop : kTitleTop + _titleLabel.frame.size.height;
     _messageTextView.frame = CGRectMake(12.0f, y, _windowWidth - 24.0f, _subTitleHeight);
+    
+    _messageTextView.backgroundColor = [UIColor blueColor];
     
     if (!_titleLabel && !_messageTextView) {
         y = 0.0f;
     }
     
-    y += _subTitleHeight + 14.0f;
+    y += _subTitleHeight + 10.0f;
     for (AlertTextView *textField in _inputs)
     {
         textField.frame = CGRectMake(12.0f, y, _windowWidth - 24.0f, textField.frame.size.height);
         textField.layer.cornerRadius = 3.0f;
         y += textField.frame.size.height + 10.0f;
     }
+    
+    // Buttons
+    CGFloat x = _windowWidth ;
+    CGFloat tempY = y;
+    for (AlertButton *btn in _buttons)
+    {
+        x -= btn.frame.size.width + 10.0f;
+        btn.frame = CGRectMake(x, y, btn.frame.size.width, btn.frame.size.height);
+        tempY = y + btn.frame.size.height + 10;
+        // Add horizontal or vertical offset acording on _horizontalButtons parameter
+    }
+    
+    // Adapt window height according to icon size
+    self.windowHeight = tempY;
+    _containerView.frame = CGRectMake(_containerView.frame.origin.x, _containerView.frame.origin.y, _windowWidth, _windowHeight);
+    
+  
 
 
 }
@@ -190,9 +212,11 @@ static PopAlertViewController *sharedData_ = nil;
 - (void)setupViewWindowWidth:(CGFloat)width
 {
     self.windowWidth = width;
-    self.windowHeight = width/5*4;
+    self.windowHeight = 160;
     
     self.subTitleHeight = 90;
+    self.subTitleY = 60;
+
     
     //Init
     
@@ -201,7 +225,11 @@ static PopAlertViewController *sharedData_ = nil;
     _containerView = [[UIView alloc]init];
     _backgroundView = [[UIView alloc]initWithFrame:kScreen_Bounds];
     _messageTextView = [[AlertTextView alloc]init];
-    
+    _headerImgView = [[UIImageView alloc]init];
+    _buttons = @[].mutableCopy;
+    _inputs= @[].mutableCopy;
+     kTitleTop = 14;
+    _isHeaderIcon = NO;
   
     //titleLabel
     _titleLabel.numberOfLines = 1;
@@ -209,6 +237,27 @@ static PopAlertViewController *sharedData_ = nil;
     _titleLabel.frame = CGRectMake(12.0f, kTitleTop, _containerView.frame.size.width - 12.0, 50);
     _titleLabel.textColor = [UIColor whiteColor];
     
+    //Text View
+    _messageTextView.editable = NO;
+    _messageTextView.font = [UIFont systemFontOfSize:20.0];
+    _messageTextView.textColor = [UIColor blackColor];
+    _messageTextView.frame = CGRectMake(12, _subTitleY, _windowWidth-12, _windowHeight);
+    
+    //Header Img View
+    _headerImgView.contentMode = UIViewContentModeScaleToFill;
+    _headerImgView.image = [UIImage imageNamed:@"btn_warning"];
+    [_headerView addSubview:_headerImgView];
+    
+    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0"))
+    {
+        _messageTextView.textContainerInset = UIEdgeInsetsZero;
+        _messageTextView.textContainer.lineFragmentPadding = 0;
+        self.automaticallyAdjustsScrollViewInsets = NO;
+    }
+    
+    
+    //header image view
+    _headerImgView.frame = CGRectMake(12, 10, 30, 30);
     
     //Header View
     _headerView.backgroundColor = RGBA(201, 0, 4, 1.0);
@@ -219,17 +268,17 @@ static PopAlertViewController *sharedData_ = nil;
     //backgroundView
     _backgroundView.backgroundColor = RGBA(0, 0, 0, 0.8);
     
-    
-    
+
     
     //add subview
-    [_containerView addSubview:_headerView];
+    [_headerView addSubview:_headerImgView];
     [_headerView addSubview:_titleLabel];
+    [_containerView addSubview:_headerView];
+    [_containerView addSubview:_messageTextView];
     [_containerView addSubview:_messageTextView];
     [self.view addSubview:_containerView];
     
     [_containerView layoutIfNeeded];
-    
 }
 
 - (void)setupNewWindow
@@ -244,7 +293,7 @@ static PopAlertViewController *sharedData_ = nil;
 }
 
 
-- (void)showVtrl:(UIViewController *)vtrl title:(NSString *)titleString alertMessage:(NSString *)alertMessage alertType:(AlertStyle)type handler:(void (^ __nullable)(UIButton *button))handler
+- (void)showVtrl:(UIViewController *)vtrl title:(NSString *)titleString alertMessage:(NSString *)alertMessage alertType:(AlertStyle)type completeText:(NSString *)completeText
 {
     
     if(_usingNewWindow)
@@ -269,6 +318,23 @@ static PopAlertViewController *sharedData_ = nil;
     [self setBackground];
     
     
+    if (completeText) {
+        [self addDoneButtonWithTitle:completeText];
+    }
+    
+//    [self addButton:completeText];
+    __weak typeof(self) weakSelf = self;
+    switch (type) {
+        case AlertSuccess:{
+            
+            break;}
+            
+        case AlertWarning:{
+            weakSelf.isHeaderIcon = YES;
+            break;}
+    }
+    
+    
     if(_usingNewWindow)
     {
         [_alertWindow makeKeyAndVisible];
@@ -287,7 +353,6 @@ static PopAlertViewController *sharedData_ = nil;
 - (void)setBackground
 {
     _backgroundView.backgroundColor = RGBA(0, 0, 0, 0.6);
-
 }
 
 
@@ -343,6 +408,40 @@ static PopAlertViewController *sharedData_ = nil;
     }];
 }
 
+#pragma mark -- Gesture
+- (void)handleTap:(UITapGestureRecognizer *)gesture
+{
+    if (_shouldDismissOnTapOutside)
+    {
+        BOOL hide = _shouldDismissOnTapOutside;
+        
+//        for(AlertTextView *txt in _inputs)
+//        {
+//            // Check if there is any keyboard on screen and dismiss
+//            if (txt.editing)
+//            {
+//                [txt resignFirstResponder];
+//                hide = NO;
+//            }
+//        }
+        if(hide)
+        {
+            [self hideView];
+        }
+    }
+}
+
+- (void)setShouldDismissOnTapOutside:(BOOL)shouldDismissOnTapOutside
+{
+    _shouldDismissOnTapOutside = shouldDismissOnTapOutside;
+    
+    if(_shouldDismissOnTapOutside)
+    {
+        self.gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
+        [_backgroundView addGestureRecognizer:_gestureRecognizer];
+    }
+}
+
 
 #pragma mark -- Button
 - (AlertButton *)addDoneButtonWithTitle:(NSString *)title
@@ -361,10 +460,17 @@ static PopAlertViewController *sharedData_ = nil;
 
 - (AlertButton *)addButton:(NSString *)titleStr
 {
-    AlertButton *btn = [[AlertButton alloc] initWithFrame:CGRectMake(0, 0, 120, 36)];
+    AlertButton *btn = [[AlertButton alloc] initWithWindowWidth:80];
     btn.layer.masksToBounds = YES;
     [btn setTitle:titleStr forState:UIControlStateNormal];
-    
+    [_containerView addSubview:btn];
+    [_buttons addObject:btn];
+//    for (AlertButton *button in _buttons) {
+//        [button adjustWidthWithWindowWidth:_windowWidth numberOfButtons:_buttons.count];
+//    }
+    if (!(_buttons.count > 1)) {
+        self.windowHeight += btn.frame.size.height + ADD_BUTTON_PADDING;
+    }
     return btn;
 }
 

@@ -21,4 +21,9 @@ typedef NSDictionary* (^ButtonFormatBlock)(void);
 
 @property (copy, nonatomic) CompleteButtonFormatBlock completeButtonFormatBlock;
 
+- (instancetype)initWithWindowWidth:(CGFloat)windowWidth;
+
+- (void)adjustWidthWithWindowWidth:(CGFloat)windowWidth numberOfButtons:(NSUInteger)numberOfButtons;
+
+
 @end

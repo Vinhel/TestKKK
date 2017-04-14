@@ -22,6 +22,9 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="PNy-GS-ixZ"/>
                     </constraints>
+                    <state key="normal">
+                        <color key="titleColor" red="0.19215686274509805" green="0.83529411764705885" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
                     <connections>
                         <action selector="dismissViewSlideAction:" destination="-1" eventType="touchUpInside" id="5F1-Dq-8nc"/>
                     </connections>
