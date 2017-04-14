@@ -63,7 +63,7 @@ static PopAlertViewController *sharedData_ = nil;
 + (PopAlertViewController *)sharedManager
 {
     if (!sharedData_) {
-        sharedData_ = [[PopAlertViewController alloc]init];
+        sharedData_ = [[PopAlertViewController alloc]initWithNewWindow];
         sharedData_.pool = [[NSMutableArray alloc] init];
     }
     return sharedData_;
@@ -494,6 +494,105 @@ static PopAlertViewController *sharedData_ = nil;
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
 }
+ 
+ #define PERFORM_SHOW_VEHICLE_PROTOCOL_UPDATE_VIEW @"ShowVehicleProtocolUpdateView"
+ 
+ @interface SettingVehicleLocationViewController ()<Obd2WrapperDelegate>
+ @property (weak, nonatomic) IBOutlet UIButton *showVehicleFinishViewButton;
+ @property BOOL isCheckFirmWareVersion;
+ @end
+ 
+ @implementation SettingVehicleLocationViewController
+ 
+ - (void)viewDidLoad {
+ [super viewDidLoad];
+ [self setButtonExclusiveTouch];
+ _isCheckFirmWareVersion = NO;
+ // Do any additional setup after loading the view.
+ }
+ 
+ - (void)viewWillAppear:(BOOL)animated{
+ [super viewWillAppear:animated];
+ if (!_isCheckFirmWareVersion) {
+ Obd2WrapperControl *obd2WrapperControl = [Obd2WrapperControl sharedManager];
+ obd2WrapperControl.delegate = self;
+ [self Indicator_StartWithTitle:NSLocalizedString(@"obd2_adapter_setting_title", nil) message:NSLocalizedString(@"check_initial_setting_progress_message", nil)];
+ [obd2WrapperControl settingFirstTimeInfo];
+ }
+ }
+ 
+ - (void)viewWillDisappear:(BOOL)animated{
+ [super viewWillDisappear:animated];
+ if (![self.navigationController.viewControllers containsObject:self]) {
+ Obd2WrapperControl *wrapper = [Obd2WrapperControl sharedManager];
+ [wrapper tcpStop];
+ }
+ }
+ 
+ - (void)didReceiveMemoryWarning {
+ [super didReceiveMemoryWarning];
+ // Dispose of any resources that can be recreated.
+ }
+ 
+ - (void)setButtonExclusiveTouch{
+ _showVehicleFinishViewButton.exclusiveTouch = YES;
+ }
+ 
+ - (IBAction)UpdateInstallationSetting:(id)sender {
+ 
+ Obd2WrapperControl *obd2Wrapper = [Obd2WrapperControl sharedManager];
+ 
+ [self Indicator_StartWithTitle:NSLocalizedString(@"sensor_correction_title", nil) message:NSLocalizedString(@"sensor_correction_progress_dialog_message", nil)];
+ 
+ obd2Wrapper.delegate = self;
+ [obd2Wrapper settingSensor1stStart];
+ }
+ 
+ #pragma mark Setting Time Info Delegate
+ - (void)didSucceedSettingFirstTimeInfo{
+ _isCheckFirmWareVersion = YES;
+ [self Indicator_End:nil];
+ }
+ - (void)didFailSettingFirstTimeInfo:(NSError *)error{
+ Obd2WrapperControl *obd2Wrapper = [Obd2WrapperControl sharedManager];
+ obd2Wrapper.delegate = nil;
+ NSString *message = [error.userInfo objectForKey:@"message"];
+ 
+ switch ((OperationErrorCode)error.code) {
+ case ERRORCODE_TCP_DISSCONNECT:
+ //            [self popViewAlertController:NSLocalizedString(@"obd2_adapter_setting_title", nil) message:[NSString stringWithFormat:NSLocalizedString(@"tcp_disconnect_error_message", nil),NSLocalizedString(@"tcp_disconnect_error_checkvehiclesetting_message",nil)]];
+ [self popToMainMenuViewAlertController:NSLocalizedString(@"obd2_adapter_setting_title", nil) message:[NSString stringWithFormat:NSLocalizedString(@"tcp_disconnect_error_message", nil),NSLocalizedString(@"tcp_disconnect_error_checkvehiclesetting_message",nil)]];
+ break;
+ default:
+ //            [self popViewAlertController:NSLocalizedString(@"obd2_adapter_setting_title", nil) message:message];
+ [self popToMainMenuViewAlertController:NSLocalizedString(@"obd2_adapter_setting_title", nil) message:message];
+ }
+ }
+ 
+ #pragma mark Setting Sensor 1st Delegate
+ - (void)didSucceedSettingSensor1stStart{
+ Obd2WrapperControl *obd2Wrapper = [Obd2WrapperControl sharedManager];
+ obd2Wrapper.delegate = nil;
+ [self commonAlertController:NSLocalizedString(@"sensor_correction_title", nil) message:NSLocalizedString(@"sensor_correction_success_message",nil) completion:^{
+ [self performSegueWithIdentifier:PERFORM_SHOW_VEHICLE_PROTOCOL_UPDATE_VIEW sender:nil];
+ }];
+ }
+ - (void)didFailSettingSensor1stStart:(NSError *)error{
+ Obd2WrapperControl *obd2Wrapper = [Obd2WrapperControl sharedManager];
+ obd2Wrapper.delegate = nil;
+ NSString *message = [error.userInfo objectForKey:@"message"];
+ 
+ switch ((OperationErrorCode)error.code) {
+ case ERRORCODE_TCP_DISSCONNECT:
+ [self commonAlertController:NSLocalizedString(@"sensor_correction_title", nil) message:[NSString stringWithFormat:NSLocalizedString(@"tcp_disconnect_error_message", nil),NSLocalizedString(@"tcp_disconnect_error_sensor_correction_message",nil)]];
+ break;
+ default:
+ [self commonAlertController:NSLocalizedString(@"sensor_correction_title", nil) message:message];
+ }
+ 
+ }
+ 
+
 */
 
 @end
