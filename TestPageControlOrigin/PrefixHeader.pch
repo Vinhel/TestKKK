@@ -18,7 +18,8 @@
 
 typedef NS_ENUM(int, AlertStyle){
     AlertSuccess = 0,
-    AlertWarning
+    AlertWarning = 1,
+    AlertWaiting
 };
 
 #define kScreen_Bounds [UIScreen mainScreen].bounds

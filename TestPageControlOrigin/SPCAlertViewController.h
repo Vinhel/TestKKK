@@ -19,7 +19,7 @@
 
  @param title ダイアログのタイトル
  @param message ダイアログのメッセージ
- @param block_ok OKボタン押下時のブロック関数
+ @param block_Ok OKボタン押下時のブロック関数
  */
 - (void)commonAlertController:(UIViewController *)vtrl Title:(NSString *)title message:(NSString *)message completion:(void(^)())block_Ok;
 
@@ -31,7 +31,7 @@
  @param block_Cancel キャンセルボタン押下時のブロック関数
  @param block_Ok OKボタン押下時のブロック関数
  */
-- (void)commonAlertControllerWithTitle:(NSString *)title message:(NSString *)message completionCancel:(void(^)())block_Cancel completionOk:(void(^)())block_Ok;
+- (void)commonAlertController:(UIViewController *)vtrl Title:(NSString *)title message:(NSString *)message completion:(void(^)())block_Ok cancelBlock:(void(^)())block_Cancel;
 
 /**
  キューに貯まっているダイアログ情報をクリアする関数

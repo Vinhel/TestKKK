@@ -43,6 +43,7 @@
     self.navigationBar.translucent = NO;
     viewControllerArray = @[].mutableCopy;
     self.currentPageIndex = 0;
+    _selectedIndex = 0;
 }
 
 -(UIStatusBarStyle)preferredStatusBarStyle {

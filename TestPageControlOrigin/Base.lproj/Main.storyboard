@@ -52,6 +52,11 @@
                                 <action selector="LeftItemAction:" destination="BYZ-38-t0r" id="Wou-bS-Brz"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" image="btn_warning" id="bqX-Zr-lqg">
+                            <connections>
+                                <action selector="RightItemAction:" destination="BYZ-38-t0r" id="jc1-PQ-LHe"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

@@ -27,36 +27,30 @@ static SPCAlertViewController *sharedData_ = nil;
 }
 
 - (void)commonAlertController:(UIViewController *)vtrl Title:(NSString *)title message:(NSString *)message completion:(void(^)())block_Ok{
-    
-//    UIAlertController *alertController = [self presentAlertControllerWithTitle:title message:message buttonTitle:@[NSLocalizedString(@"dialog_button_title_ok", nil)] cancelCompletion:nil okCompletion:block_Ok];
-//    [self addPoolObject:alertController];
-    
-//    PopAlertView *popView = [PopAlertView defaultPopupView];
-////    UIWindow * window = [[UIApplication sharedApplication] keyWindow];
-////    [window insertSubview:popView atIndex:0];
-//    [vtrl.view addSubview:popView];
-//    [popView showInfo:vtrl Title:title alertMessage:message alertType:AlertSuccess handler:^(UIButton *button) {
-//        NSLog(@"ok");
-//    }];
-    
-    
-//    PopAlertViewController *popVtrl = [PopAlertViewController sharedManager];
+
     PopAlertViewController *popVtrl = [[PopAlertViewController alloc]initWithNewWindow];
     popVtrl.shouldDismissOnTapOutside = YES;
-//    popVtrl.alertType = AlertWarning;
-    [popVtrl showVtrl:vtrl title:title alertMessage:message alertType:AlertWarning completeText:@"OK"];
     
+    [popVtrl showVtrl:vtrl title:title alertMessage:message alertType:AlertWarning completeText:@"OK" completionBlock:block_Ok cancelBlock:nil];
     
-}
-
-- (void)commonAlertControllerWithTitle:(NSString *)title message:(NSString *)message completionCancel:(void(^)())block_Cancel completionOk:(void(^)())block_Ok{
-    
-    UIAlertController *alertController = [self presentAlertControllerWithTitle:title message:message buttonTitle:@[NSLocalizedString(@"dialog_button_title_cancel", nil),NSLocalizedString(@"dialog_button_title_ok", nil)] cancelCompletion:block_Cancel okCompletion:block_Ok];
-    [self addPoolObject:alertController];
+//    [self addPoolObject:popVtrl];
     
 }
 
-- (void)addPoolObject:(UIAlertController *)object{
+
+
+- (void)commonAlertController:(UIViewController *)vtrl Title:(NSString *)title message:(NSString *)message completion:(void(^)())block_Ok cancelBlock:(void(^)())block_Cancel{
+    
+//    UIAlertController *alertController = [self presentAlertControllerWithTitle:title message:message buttonTitle:@[NSLocalizedString(@"dialog_button_title_cancel", nil),NSLocalizedString(@"dialog_button_title_ok", nil)] cancelCompletion:block_Cancel okCompletion:block_Ok];
+//    [self addPoolObject:alertController];
+    
+    PopAlertViewController *popVtrl = [[PopAlertViewController alloc]initWithNewWindow];
+    popVtrl.shouldDismissOnTapOutside = YES;
+    [popVtrl showVtrl:vtrl title:title alertMessage:message alertType:AlertSuccess completeText:@"OK" completionBlock:block_Ok cancelBlock:block_Cancel];
+    
+}
+
+- (void)addPoolObject:(PopAlertViewController *)object{
     if (_pool.count == 0) {
         [self presentedAlertController:object];
     }
@@ -74,20 +68,7 @@ static SPCAlertViewController *sharedData_ = nil;
 
 - (UIAlertController *)presentAlertControllerWithTitle:(NSString *)title message:(NSString *)message buttonTitle:(NSArray *)buttonTitle cancelCompletion:(void(^)())block_Cancel  okCompletion:(void(^)())block_Ok{
     UIAlertController *alertcontroller = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
-//    UIAlertAction *imgAlert = [UIAlertAction ]
-    UIImage *warningImg = [UIImage imageNamed:@"btn_warning"];
-
-    
-//    UIAlertController *alert = [UIAlertController alertControllerWithTitle: title == nil ? @"": title message: message preferredStyle: UIAlertControllerStyleAlert];
-//    
-//    UIAlertAction *defaultAction = [UIAlertAction actionWithTitle: cancelButtonTitle style: UIAlertActionStyleCancel handler: nil];
-//    
-//    [alert addAction: defaultAction];
-    
     for (int i = 0; i < buttonTitle.count; i++) {
-//        [alertcontroller addAction:[UIAlertAction actionWithTitle:buttonTitle[i] style:[buttonTitle[i] isEqualToString:NSLocalizedString(@"dialog_button_title_cancel", nil)] ? UIAlertActionStyleCancel: UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-//            [self CompletionBlockWithAlertController:alertcontroller buttonTitle:buttonTitle[i] cancelCompletion:block_Cancel  okCompletion:block_Ok];
-//        }]];
         UIAlertAction *alertAction = [UIAlertAction actionWithTitle:buttonTitle[i] style:[buttonTitle[i] isEqualToString:NSLocalizedString(@"dialog_button_title_cancel", nil)] ? UIAlertActionStyleCancel: UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             [self CompletionBlockWithAlertController:alertcontroller buttonTitle:buttonTitle[i] cancelCompletion:block_Cancel  okCompletion:block_Ok];
         }];
@@ -120,7 +101,7 @@ static SPCAlertViewController *sharedData_ = nil;
 }
 
 //アラートを最前面にて表示させるメソッド
-- (void)presentedAlertController:(UIAlertController *)alertController{
+- (void)presentedAlertController:(PopAlertViewController *)alertController{
     UIWindow *window;
     UIWindow *tmpWindow;
     UIApplication *application = [UIApplication sharedApplication];
@@ -137,6 +118,7 @@ static SPCAlertViewController *sharedData_ = nil;
     while (presentedViewController.presentedViewController) {
         presentedViewController = presentedViewController.presentedViewController;
     }
+    
     dispatch_async(dispatch_get_main_queue(), ^{
         if ([presentedViewController isBeingDismissed]) {
             [presentedViewController.presentingViewController presentViewController:alertController animated:YES completion:nil];

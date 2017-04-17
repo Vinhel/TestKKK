@@ -23,10 +23,19 @@
 
 - (IBAction)LeftItemAction:(id)sender {
     [self commonAlertController:@"title" message:@"message" completion:^{
-        
+                NSLog(@"OK block");
     }];
     
    }
+- (IBAction)RightItemAction:(id)sender {
+    
+    [self commonAlertControllerWithTitle:@"Title" message:@"message" completionCancel:^{
+        NSLog(@"Block cancel");
+    } completionOk:^{
+        NSLog(@"Block ok");
+    }];
+    
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

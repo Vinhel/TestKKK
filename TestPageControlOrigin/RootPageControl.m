@@ -38,8 +38,8 @@
         weakSelf.navigationController.selectedIndex = index;
         
     }];
-    [_mySegmentControl selectIndex:0];
-    _mySegmentControl.selectedIndex = 0;
+    [_mySegmentControl selectIndex:2];
+    _mySegmentControl.selectedIndex = 2;
     _mySegmentControl.backgroundColor = [UIColor redColor];
     [self.segView addSubview:_mySegmentControl];
 }

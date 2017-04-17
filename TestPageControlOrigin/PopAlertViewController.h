@@ -16,7 +16,7 @@ typedef void (^AlertActionBlock)(void);
 + (PopAlertViewController *)sharedManager;
 - (instancetype)initWithNewWindow;
 
-- (void)showVtrl:(UIViewController *)vtrl title:(NSString *)titleString alertMessage:(NSString *)alertMessage alertType:(AlertStyle)type completeText:(NSString *)completeText;
+- (void)showVtrl:(UIViewController *)vtrl title:(NSString *)titleString alertMessage:(NSString *)alertMessage alertType:(AlertStyle)type completeText:(NSString *)completeText completionBlock:(void(^)())block_Ok cancelBlock:(void(^)())block_Cancel;
 
 - (AlertButton *)addDoneButtonWithTitle:(NSString *)title;
 - (AlertButton *)addButton:(NSString *)titleStr actionBlock:(AlertActionBlock)action;

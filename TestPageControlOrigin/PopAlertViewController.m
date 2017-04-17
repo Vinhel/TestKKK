@@ -8,7 +8,7 @@
 
 #import "PopAlertViewController.h"
 #import "AlertTextView.h"
-#define ADD_BUTTON_PADDING 10.0f
+#define ADD_BUTTON_PADDING 6.0f
 
 @interface PopAlertViewController ()
 typedef void (^DismissBlock)(void);
@@ -173,18 +173,16 @@ static PopAlertViewController *sharedData_ = nil;
     CGFloat y = (_titleLabel.text == nil) ? kTitleTop : kTitleTop + _titleLabel.frame.size.height;
     _messageTextView.frame = CGRectMake(12.0f, y, _windowWidth - 24.0f, _subTitleHeight);
     
-    _messageTextView.backgroundColor = [UIColor blueColor];
-    
     if (!_titleLabel && !_messageTextView) {
         y = 0.0f;
     }
     
-    y += _subTitleHeight + 10.0f;
+    y += _subTitleHeight + ADD_BUTTON_PADDING;
     for (AlertTextView *textField in _inputs)
     {
         textField.frame = CGRectMake(12.0f, y, _windowWidth - 24.0f, textField.frame.size.height);
         textField.layer.cornerRadius = 3.0f;
-        y += textField.frame.size.height + 10.0f;
+        y += textField.frame.size.height + ADD_BUTTON_PADDING;
     }
     
     // Buttons
@@ -212,9 +210,9 @@ static PopAlertViewController *sharedData_ = nil;
 - (void)setupViewWindowWidth:(CGFloat)width
 {
     self.windowWidth = width;
-    self.windowHeight = 160;
+    self.windowHeight = 130-8;
     
-    self.subTitleHeight = 90;
+    self.subTitleHeight = 60;
     self.subTitleY = 60;
 
     
@@ -242,10 +240,11 @@ static PopAlertViewController *sharedData_ = nil;
     _messageTextView.font = [UIFont systemFontOfSize:20.0];
     _messageTextView.textColor = [UIColor blackColor];
     _messageTextView.frame = CGRectMake(12, _subTitleY, _windowWidth-12, _windowHeight);
+//    _messageTextView.backgroundColor = [UIColor blueColor];
     
     //Header Img View
     _headerImgView.contentMode = UIViewContentModeScaleToFill;
-    _headerImgView.image = [UIImage imageNamed:@"btn_warning"];
+//    _headerImgView.image = _isHeaderIcon?[UIImage imageNamed:@"btn_warning"]:nil;
     [_headerView addSubview:_headerImgView];
     
     if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0"))
@@ -293,7 +292,7 @@ static PopAlertViewController *sharedData_ = nil;
 }
 
 
-- (void)showVtrl:(UIViewController *)vtrl title:(NSString *)titleString alertMessage:(NSString *)alertMessage alertType:(AlertStyle)type completeText:(NSString *)completeText
+- (void)showVtrl:(UIViewController *)vtrl title:(NSString *)titleString alertMessage:(NSString *)alertMessage alertType:(AlertStyle)type completeText:(NSString *)completeText  completionBlock:(void(^)())block_Ok cancelBlock:(void(^)())block_Cancel
 {
     
     if(_usingNewWindow)
@@ -313,7 +312,6 @@ static PopAlertViewController *sharedData_ = nil;
         [_rootVtrl.view addSubview:self.backgroundView];
     }
    
-    
     self.view.alpha = 0.0f;
     [self setBackground];
     
@@ -323,16 +321,26 @@ static PopAlertViewController *sharedData_ = nil;
     }
     
 //    [self addButton:completeText];
-    __weak typeof(self) weakSelf = self;
-    switch (type) {
+    UIColor *headerColor;    switch (type) {
         case AlertSuccess:{
-            
+            self.isHeaderIcon = NO;
+            headerColor = RGBA(49, 213, 255, 1.0);
             break;}
             
         case AlertWarning:{
-            weakSelf.isHeaderIcon = YES;
+            self.isHeaderIcon = YES;
+            _headerImgView.image = _isHeaderIcon?[UIImage imageNamed:@"btn_warning"]:nil;
+            headerColor = RGBA(201, 0, 4, 1.0);
             break;}
+            
+        case AlertWaiting:{
+            self.isHeaderIcon = NO;
+            headerColor = RGBA(49, 213, 255, 1.0);
+            break;
+        }
     }
+    
+    _headerView.backgroundColor = headerColor;
     
     
     if(_usingNewWindow)
@@ -342,6 +350,13 @@ static PopAlertViewController *sharedData_ = nil;
     
     
      [self showView];
+    
+    if (block_Ok) {
+        block_Ok();
+    }
+    if (block_Cancel) {
+        block_Cancel();
+    }
     
     self.titleLabel.text = titleString;
     _messageTextView.text = alertMessage;
